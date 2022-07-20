@@ -4,16 +4,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>eu.openanalytics</groupId>
-	<artifactId>shinyproxy</artifactId>
+	<artifactId>indexmic</artifactId>
 	<version>2.6.1</version>
 	<packaging>jar</packaging>
 
-	<name>ShinyProxy</name>
-	<description>deploy Shiny apps in an enterprise context</description>
+	<name>IndexMic</name>
+	<description>Plataforma para el despligue de aplicaciones web contenedorizadas.</description>
 
 	<organization>
-		<name>Open Analytics NV</name>
-		<url>https://www.shinyproxy.io/</url>
+		<name>Proyecto AIS S.A.S.</name>
+		<url>https://proyais.com/</url>
 	</organization>
 
 	<parent>
@@ -171,10 +171,10 @@
 		        </executions>
 				-->
 				<configuration>
-					<license>(c) Copyright Open Analytics NV, 2016-2020 - Apache License 2.0</license>
+					<license>(c) Copyright Open Analytics NV, 2016-2020 - Apache License 2.0 / Modifications (c) Copyright Proyecto AIS, 2021-2022</license>
 					<release>1.el7</release>
 					<group>Development/Tools</group>
-					<packager>Open Analytics</packager>
+					<packager>Proyecto AIS S.A.S.</packager>
 					<defineStatements>
 						<defineStatement>_unpackaged_files_terminate_build 0</defineStatement>
 					</defineStatements>
