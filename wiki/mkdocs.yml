@@ -1,0 +1,21 @@
+site_name: IndexMic
+nav:
+  - Inicio: index.md
+  - Documentación:
+    - Instalación: instalacion.md
+    - Configuración:
+      - Autenticación: auth.md
+      - Analítica Integrada Salud: aisalud.md
+extra_css:
+  - stylesheets/extra.css
+theme:
+  language: es
+  name: material
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - toc.integrate
+extra:
+  version:
+    provider: mike
+

@@ -1,0 +1,15 @@
+
+deploy-prod:
+  image: tkikuchi/mkdocs-firebase-pipeline:node16-alpine
+  stage: deploy
+  only:
+    - master
+  script:
+    - cd ./wiki
+    - apk add git
+    - git remote set-url origin https://$GIT_CI_USER:$GIT_CI_PASS@$CI_SERVER_HOST/$CI_PROJECT_PATH.git
+    - git config --global user.email "comercial@proyais.com"
+    - git config --global user.name "Gitlab Runner"
+    - pip install mike
+    - mike deploy --push $CI_COMMIT_BRANCH
+
