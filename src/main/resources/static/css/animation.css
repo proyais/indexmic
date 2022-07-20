@@ -1,0 +1,179 @@
+/**
+ * ShinyProxy
+ *
+ * Copyright (C) 2016-2021 Open Analytics
+ * Modifications Copyright (C) 2021-2022 Proyecto AIS S.A.S.
+ *
+ * ===========================================================================
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the Apache License as published by
+ * The Apache Software Foundation, either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * Apache License for more details.
+ *
+ * You should have received a copy of the Apache License
+ * along with this program.  If not, see <http://www.apache.org/licenses/>
+ */
+.btn-primary {
+  color: #fff;
+  background: #0099CC;
+  border-color: #fff;
+} 
+
+.btn-primary:hover {
+  color: #0099CC;
+  background: #fff;
+  border-color: #0099CC;
+} 
+
+.area{
+background: transparent;  
+background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);  
+width: 100%;
+height:100vh;
+
+
+}
+
+.circles{
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+overflow: hidden;
+z-index: -1;
+}
+
+.circles li{
+position: absolute;
+display: block;
+list-style: none;
+width: 20px;
+height: 20px;
+background: transparent;
+animation: animate 25s linear infinite;
+bottom: -150px;
+
+}
+
+.circles li:nth-child(1){
+left: 25%;
+width: 80px;
+height: 80px;
+animation-delay: 0s;
+}
+
+
+.circles li:nth-child(2){
+left: 10%;
+width: 20px;
+height: 20px;
+animation-delay: 2s;
+animation-duration: 12s;
+}
+
+.circles li:nth-child(3){
+left: 70%;
+width: 20px;
+height: 20px;
+animation-delay: 4s;
+}
+
+.circles li:nth-child(4){
+left: 40%;
+width: 60px;
+height: 60px;
+animation-delay: 0s;
+animation-duration: 18s;
+}
+
+.circles li:nth-child(5){
+left: 65%;
+width: 20px;
+height: 20px;
+animation-delay: 0s;
+}
+
+.circles li:nth-child(6){
+left: 75%;
+width: 110px;
+height: 110px;
+animation-delay: 3s;
+}
+
+.circles li:nth-child(7){
+left: 35%;
+width: 150px;
+height: 150px;
+animation-delay: 7s;
+}
+
+.circles li:nth-child(8){
+left: 50%;
+width: 25px;
+height: 25px;
+animation-delay: 15s;
+animation-duration: 45s;
+}
+
+.circles li:nth-child(9){
+left: 20%;
+width: 15px;
+height: 15px;
+animation-delay: 2s;
+animation-duration: 35s;
+}
+
+.circles li:nth-child(10){
+left: 85%;
+width: 150px;
+height: 150px;
+animation-delay: 0s;
+animation-duration: 11s;
+}
+
+
+
+@keyframes animate {
+
+  0%{
+  transform: translateY(0) rotate(0deg);
+  opacity: 1;
+  border-radius: 0;
+  }
+
+  100%{
+  transform: translateY(-1000px) rotate(720deg);
+  opacity: 0;
+  border-radius: 50%;
+  }
+
+}
+
+.prys-loader {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  animation: prys-loader 1.2s infinite;
+}
+
+@keyframes prys-loader {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
+}
+

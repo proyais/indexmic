@@ -3,6 +3,7 @@
     ShinyProxy
 
     Copyright (C) 2016-2021 Open Analytics
+    Modifications Copyright (C) 2021-2022 Proyecto AIS S.A.S.
 
     ===========================================================================
 
@@ -26,10 +27,8 @@
 <head lang="en">
 	<title th:text="${appTitle} + ' - ' + ${appInstanceDisplayName}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" media="screen" th:href="@{${bootstrapCss}}" />
-	<link rel="stylesheet" media="screen" th:href="@{/css/default.css}"/>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
 	<script th:src="@{${jqueryJs}}"></script>
-	<script th:src="@{${bootstrapJs}}"></script>
 	<script th:src="@{${handlebars}}"></script>
 	<script th:src="@{${cookieJs}}"></script>
 	<script th:src="@{/js/shiny.app.js}"></script>
@@ -40,6 +39,9 @@
 	<script th:src="@{/js/shiny.common.js}"></script>
 	<script th:if="${operatorEnabled}" th:src="@{/js/shiny.operator.js}"></script>
 	<script th:src="@{/handlebars/precompiled.js}"></script>
+	<link rel="stylesheet" media="screen" th:href="@{/css/bootstrap.css}" />
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<link rel="stylesheet" media="screen" th:href="@{/css/default.css}"/>
 </head>
 <body id="appPage">
 	<div th:replace="../fragments/navbar :: navbar"></div>
@@ -47,31 +49,31 @@
     <div id="iframeinsert"></div>
 	<div id="new-version-banner" class="alert alert-info" role="alert" style="display:none;">
 		<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-		A new version of <span th:text="${application_name}"></span> is available <button id="new-version-btn" class="btn btn-default btn-sm" >Switch to new version!</button>
+		Una nueva versión de <span th:text="${application_name}"></span> está disponible <button id="new-version-btn" class="btn btn-default btn-sm" >¡Cambiar a nueva versión!</button>
 	</div>
-    <div id="loading" class="loading loading-img"><div class="loading-txt">Launching <span th:text="${appTitle}"></span>...</div></div>
+    <div id="loading" class="loading loading-img"><div class="loading-txt">Cargando <span th:text="${appTitle}"></span>...</div></div>
 	<div id="reconnecting" class="loading loading-img">
 		<div class="loading-txt">
-			Reconnecting to <span th:text="${appTitle}"></span>...
+			Reconectando a <span th:text="${appTitle}"></span>...
 			<span class="retryingDetails">
 				<br>
-				Attempt <span class="reloadAttempts"></span>/<span class="maxReloadAttempts"></span>
+				Intento <span class="reloadAttempts"></span>/<span class="maxReloadAttempts"></span>
 				<br>
-				Retrying <span id="retryInXSeconds">in <span class="retrySeconds"></span></span><span id="retryNow">now</span>
+				Reintentando <span id="retryInXSeconds">en <span class="retrySeconds"></span></span><span id="retryNow">ahora</span>
 			</span>
 		</div>
 	</div>
 	<div id="reloadFailed" class="loading loading-img">
 		<div class="loading-txt">
-			Failed to reload <span th:text="${appTitle}"></span><br><br>
+			No se pudo recargar la aplicación <span th:text="${appTitle}"></span><br><br>
 			<span class="refreshButton">
-				<button onClick="window.location.reload()" class="btn btn-default">Refresh page</button>
+				<button onClick="window.location.reload()" class="btn btn-default">Recargar página</button>
 			</span>
 		</div>
 	</div>
 	<div id="appStopped" class="loading">
 		<div class="loading-txt">
-			This app has been stopped, you can now close this tab.<br><br>
+			La aplicación se ha detenido, ya puede cerrar esta ventana.<br><br>
 			<span class="refreshButton">
 				<button onClick="window.location.reload()" class="btn btn-default">Restart app</button>
 			</span>
@@ -79,7 +81,7 @@
 	</div>
 	<div id="userLoggedOut" class="loading">
 		<div class="loading-txt">
-			You logged out using another browser tab, you can now close this tab.<br><br>
+			Ha cerrado sesión en otro navegador, ya puede cerrar esta ventana.<br><br>
 			<span class="refreshButton">
 				<a th:href="@{/}" class="btn btn-default">Login again</a>
 			</span>

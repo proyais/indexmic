@@ -353,7 +353,6 @@
 					</excludes>
 				</configuration>
 				<executions>
-					<!--
 					<execution>
 						<id>generate-copyright-headers</id>
 						<phase>process-sources</phase>
@@ -361,7 +360,6 @@
 							<goal>format</goal>
 						</goals>
 					</execution>
-					-->
 					<execution>
 						<id>check-copyright-headers</id>
 						<phase>package</phase>

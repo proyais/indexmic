@@ -3,6 +3,7 @@
     ShinyProxy
 
     Copyright (C) 2016-2021 Open Analytics
+    Modifications Copyright (C) 2021-2022 Proyecto AIS S.A.S.
 
     ===========================================================================
 
@@ -26,43 +27,51 @@
 <head lang="en">
 	<title th:text="${title}"></title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<link rel="stylesheet" media="screen" th:href="@{${bootstrapCss}}" />
-	<link rel="stylesheet" media="screen" th:href="@{/css/default.css}"/>
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
 	<script th:src="@{${jqueryJs}}"></script>
-	<script th:src="@{${bootstrapJs}}"></script>
+	<link rel="stylesheet" media="screen" th:href="@{/css/bootstrap.css}" />
+	<script th:src="@{/js/bootstrap.min.js}"></script>
+	<link rel="stylesheet" media="screen" th:href="@{/css/default.css}"/>
 </head>
 <body>
 	<div th:replace="../fragments/navbar :: navbar"></div>
 
 	<div class="container-fluid">
 		<div id="admin">
-			<h3>Active Proxies</h3>
-			<table class="table table-condensed">
-				<tr>
-					<th class="admin-proxy-id" >ID</th>
-					<th class="admin-proxy-status">Status</th>
-					<th>User</th>
-					<th>Appname</th>
-					<th>Instance</th>
-					<th>Endpoint</th>
-					<th class="admin-proxy-uptime">Uptime</th>
-					<th class="admin-proxy-heartbeat">Last heartbeat</th>
-					<th>Image</th>
-					<th>Image tag</th>
-				</tr>
-				<tr th:each="proxy: ${proxies}" class="admin-monospace">
-					<td class="admin-proxy-id" th:text="${proxy.id}"></td>
-					<td class="admin-proxy-status" th:text="${proxy.status}"></td>
-					<td th:text="${proxy.userId}"></td>
-					<td th:text="${proxy.appName}"></td>
-					<td th:text="${proxy.appInstanceName}"></td>
-					<td th:text="${proxy.endpoint}"></td>
-					<td class="admin-proxy-uptime" th:text="${proxy.uptime}"></td>
-					<td class="admin-proxy-heartbeat" th:text="${proxy.lastHeartBeat}"></td>
-					<td th:text="${proxy.imageName}"></td>
-					<td th:text="${proxy.imageTag}"></td>
-				</tr>
-			</table>
+      <div class="card">
+        <div class="card-header">
+          <h3>Active Proxies</h3>
+        </div>
+        <div class="card-body">
+          <table class="table table-condensed">
+            <tr>
+              <th class="admin-proxy-id" >ID</th>
+              <th class="admin-proxy-status">Status</th>
+              <th>User</th>
+              <th>Appname</th>
+              <th>Instance</th>
+              <th>Endpoint</th>
+              <th class="admin-proxy-uptime">Uptime</th>
+              <th class="admin-proxy-heartbeat">Last heartbeat</th>
+              <th>Image</th>
+              <th>Image tag</th>
+            </tr>
+            <tr th:each="proxy: ${proxies}" class="admin-monospace">
+              <td class="admin-proxy-id" th:text="${proxy.id}"></td>
+              <td class="admin-proxy-status" th:text="${proxy.status}"></td>
+              <td th:text="${proxy.userId}"></td>
+              <td th:text="${proxy.appName}"></td>
+              <td th:text="${proxy.appInstanceName}"></td>
+              <td th:text="${proxy.endpoint}"></td>
+              <td class="admin-proxy-uptime" th:text="${proxy.uptime}"></td>
+              <td class="admin-proxy-heartbeat" th:text="${proxy.lastHeartBeat}"></td>
+              <td th:text="${proxy.imageName}"></td>
+              <td th:text="${proxy.imageTag}"></td>
+            </tr>
+          </table>
+        </div>
+      </div>
 		</div>
 	</div>
 </body>

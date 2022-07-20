@@ -2,6 +2,7 @@
  * ShinyProxy
  *
  * Copyright (C) 2016-2021 Open Analytics
+ * Modifications Copyright (C) 2021-2022 Proyecto AIS S.A.S.
  *
  * ===========================================================================
  *
@@ -54,7 +55,7 @@ public class IndexController extends BaseController {
 		Map<ProxySpec, String> appLogos = new HashMap<>();
 		map.put("appLogos", appLogos);
 		
-		boolean displayAppLogos = false;
+		boolean displayAppLogos = true;
 		for (ProxySpec app: apps) {
 			if (app.getLogoURL() != null) {
 				displayAppLogos = true;

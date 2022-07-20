@@ -3,6 +3,7 @@
     ShinyProxy
 
     Copyright (C) 2016-2021 Open Analytics
+    Modifications Copyright (C) 2021-2022 Proyecto AIS S.A.S.
 
     ===========================================================================
 
@@ -27,32 +28,32 @@
 <head></head>
 <body>
 	<div th:fragment="navbar" th:if="${showNavbar}" id="navbar">
-		<nav class="navbar navbar-inverse navbar-fixed-top">
+		<nav class="navbar fixed-top navbar-expand-lg bg-light">
 			<div class="container-fluid">
-				<div class="navbar-header">
-					<img class="navbar-brand" th:src="${logo}" />
-					<a class="navbar-brand" th:href="@{/}" th:text="${title}"></a>
-				</div>
-				<div class="navbar-form navbar-right">
-					<a role="button" class="btn btn-primary btn-sm" id="switchInstancesModal-btn"
+        <div class="navbar-brand">
+					<a th:href="@{/}">
+            <img th:src="${logo}" height="24"/>
+          </a>
+        </div>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+          <i class="bi bi-list"></i>
+        </button>
+        <div class="collapse navbar-collapse justify-content-end" id="collapsibleNavbar">
+          <i class="bi bi-person-check-fill me-2"></i>
+          <span class="me-2" sec:authentication="name"></span>
+					<a role="button" class="btn btn-primary btn-sm me-2" id="switchInstancesModal-btn"
 					   data-toggle="modal" data-target="#switchInstancesModal" th:if="${isAppPage && (maxInstances > 1 || maxInstances == -1)}" >Switch instance</a>
 
-					<a role="button" class="btn btn-primary btn-sm" onclick="Shiny.instances.eventHandlers.onRestartInstance();"
-						th:if="${isAppPage && maxInstances == 1}" >Restart app</a>
+					<a role="button" class="btn btn-primary btn-sm me-2" onclick="Shiny.instances.eventHandlers.onRestartInstance();"
+						th:if="${isAppPage && maxInstances == 1}" >Reiniciar app</a>
 
-					<a role="button" class="btn btn-primary btn-sm" onclick="Shiny.instances.eventHandlers.onDeleteInstance();"
-					   th:if="${isAppPage && maxInstances == 1}" >Stop app</a>
+					<a role="button" class="btn btn-primary btn-sm me-2" onclick="Shiny.instances.eventHandlers.onDeleteInstance();"
+					   th:if="${isAppPage && maxInstances == 1}" >Detener app</a>
 
-					<a role="button" class="btn btn-primary btn-sm" th:if="${isSupportEnabled}"
+					<a role="button" class="btn btn-primary btn-sm me-2" th:if="${isSupportEnabled}"
 						data-toggle="modal" data-target="#reportIssueModal">Report Issue</a>
-					<a role="button" class="btn btn-primary btn-sm" th:href="@{/admin}" th:if="${isAdmin}">Admin</a>
-					<a role="button" class="btn btn-primary btn-sm" th:href="@{${logoutUrl}}" th:if="${isLoggedIn}">Sign Out</a>
-				</div>
-				<div class="navbar-right" sec:authorize="isAuthenticated()">
-					<span class="navbar-text">
-						<span class="glyphicon glyphicon-user"></span>
-						<span sec:authentication="name"></span>
-					</span>
+					<a role="button" class="btn btn-primary btn-sm me-2" th:href="@{/admin}" th:if="${isAdmin}">Admin</a>
+					<a role="button" class="btn btn-primary btn-sm me-2" th:href="@{${logoutUrl}}" th:if="${isLoggedIn}">Cerrar sesión</a>
 				</div>
 			</div>
 		</nav>

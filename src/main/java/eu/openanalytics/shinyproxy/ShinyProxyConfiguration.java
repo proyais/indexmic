@@ -2,6 +2,7 @@
  * ShinyProxy
  *
  * Copyright (C) 2016-2021 Open Analytics
+ * Modifications Copyright (C) 2021-2022 Proyecto AIS S.A.S.
  *
  * ===========================================================================
  *

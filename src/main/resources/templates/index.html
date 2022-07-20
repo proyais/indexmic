@@ -3,6 +3,7 @@
     ShinyProxy
 
     Copyright (C) 2016-2021 Open Analytics
+    Modifications Copyright (C) 2021-2022 Proyecto AIS S.A.S.
 
     ===========================================================================
 
@@ -26,14 +27,16 @@
 <head lang="en">
     <title th:text="${title}"></title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <link rel="stylesheet" media="screen" th:href="@{${bootstrapCss}}"/>
-    <link rel="stylesheet" media="screen" th:href="@{/css/default.css}"/>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <script th:src="@{${jqueryJs}}"></script>
-    <script th:src="@{${bootstrapJs}}"></script>
     <script th:src="@{${cookieJs}}"></script>
     <script th:if="${operatorEnabled}" th:src="@{/js/shiny.operator.js}"></script>
     <script th:src="@{/js/shiny.api.js}"></script>
     <script th:src="@{/js/shiny.common.js}"></script>
+    <link rel="stylesheet" media="screen" th:href="@{/css/bootstrap.css}" />
+    <link rel="stylesheet" media="screen" th:href="@{/css/bootstrap-icons.css}" />
+    <script th:src="@{/js/bootstrap.min.js}"></script>
+    <link rel="stylesheet" media="screen" th:href="@{/css/default.css}"/>
 </head>
 <body>
 <!-- navigation bar -->
@@ -43,56 +46,35 @@
     A new version of <span th:text="${application_name}"></span> is available
     <button id="new-version-btn" class="btn btn-default btn-sm">Switch to new version!</button>
 </div>
-
 <!-- This is a fragment used to display a single app. -->
 <!-- Modify this in order to change how a single app looks. -->
 <th:block th:fragment="app(app)">
     <th:block th:if="${app != null}">
-        <li th:if="${!displayAppLogos}">
-            <a th:href="${@thymeleaf.getAppUrl(app)}"
-               th:text="${app.displayName == null} ? ${app.id} : ${app.displayName}"></a>
-            <br th:if="${app.description != null}"/>
-            <span th:if="${app.description != null}" th:utext="${app.description}"></span>
-        </li>
-        <div th:if="${displayAppLogos}" class="row" style="margin-top:20px;">
-            <div class="col-md-6 col-md-offset-3">
-                <div class="media">
-                    <div class="media-left">
-                        <img th:if="${appLogos.get(app) != null}" th:src="${appLogos.get(app)}"></img>
-                    </div>
-                    <div class="media-body">
-                        <a th:href="${@thymeleaf.getAppUrl(app)}"
-                           th:text="${app.displayName == null} ? ${app.id} : ${app.displayName}"></a>
-                        <br th:if="${app.description != null}"/>
-                        <span th:if="${app.description != null}" th:utext="${app.description}"></span>
-                    </div>
-                </div>
+      <div class="container app_item card">
+        <a th:href="${@thymeleaf.getAppUrl(app)}">
+          <div th:if="${displayAppLogos}" class="row">
+            <div class="col-sm-2 d-flex align-items-center">
+                <img th:if="${appLogos.get(app) == null}" src="https://comunidadbioinfo.github.io/cdsb2021_workflows/img/shiny_1.png" style="width:100%;"></img>
+                <img th:if="${appLogos.get(app) != null}" th:src="${appLogos.get(app)}" style="width:100%; height: 100%;"></img>
             </div>
-        </div>
+            <div class="col-sm-10">
+              <h3 th:text="${app.displayName == null} ? ${app.id} : ${app.displayName}"></h3>
+              <p th:if="${app.description != null}" th:utext="${app.description}"></p>
+            </div>
+          </div>
+          <div th:if="${!displayAppLogos}" class="row">
+              <a th:href="${@thymeleaf.getAppUrl(app)}"
+                 th:text="${app.displayName == null} ? ${app.id} : ${app.displayName}"></a>
+              <br th:if="${app.description != null}"/>
+              <span th:if="${app.description != null}" th:utext="${app.description}"></span>
+          </div>
+        </a>
+      </div>
     </th:block>
 </th:block>
 <!--End of the template.-->
-
-<!-- Part that shows a list when none of the apps contain a logo -->
-<div th:if="${!displayAppLogos}" id="applist">
-    <th:block th:each="group: ${templateGroups}">
-        <h2 th:text="${group.properties.get('display-name')}"></h2>
-        <ul>
-            <th:block th:each="app: ${groupedApps.get(group.id)}" th:include="index :: app(${app})"/>
-        </ul>
-        <br>
-    </th:block>
-    <th:block th:if="${ungroupedApps.size() > 0}">
-        <!-- Only show the "Other" header if there are other groups with apps -->
-        <h2 th:if="${groupedApps.size() > 0}">Other</h2>
-        <ul>
-            <th:block th:each="app: ${ungroupedApps}" th:include="index :: app(${app})"/>
-        </ul>
-    </th:block>
-</div>
-
 <!-- Part that shows a list when the apps contain a logo -->
-<div th:if="${displayAppLogos}" class="container" id="applist">
+<div class="container" id="applist">
     <th:block th:each="group: ${templateGroups}">
         <div class="row" style="margin-top:20px;">
             <div class="col-md-6 col-md-offset-3">
@@ -109,10 +91,15 @@
                 <h2 th:if="${groupedApps.size() > 0}">Other</h2>
             </div>
         </div>
-        <th:block th:each="app: ${ungroupedApps}" th:include="index :: app(${app})"/>
+        <div class="container">
+          <div class="row">
+            <div class = "col-md-12">
+              <th:block th:each="app: ${ungroupedApps}" th:include="index :: app(${app})"/>
+            </div>
+          </div>
+        </div>
     </th:block>
 </div>
-
 
 <script th:if="${operatorEnabled}" type="text/javascript" th:inline="javascript">
     $(window).on('load', function () {
