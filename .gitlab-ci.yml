@@ -1,9 +1,38 @@
 
-deploy-prod:
+variables:
+  MAVEN_CLI_OPTS: "--batch-mode"
+  MEVEN_DEPLOY_OPTS: "-DskipTests"
+  MAVEN_OPTS: "-Dmaven.repo.local=.m2/repository"
+
+stages:
+  - build
+  - testing
+  - deploy
+
+cache:
+  key: "maven-cache-indexmic"
+  paths:
+    - .m2/repository
+    - target/
+
+build:
+  image: maven:3.6-jdk-11-slim
+  stage: build
+  script:
+    - mvn $MAVEN_CLI_OPTS $MAVEN_OPTS compile
+
+test-jar:
+  image: maven:3.6-jdk-11-slim
+  stage: testing
+  script:
+    - mvn $MAVEN_CLI_OPTS $MAVEN_OPTS test
+
+deploy-wiki:
   image: tkikuchi/mkdocs-firebase-pipeline:node16-alpine
   stage: deploy
   only:
     - master
+    - tags
   script:
     - cd ./wiki
     - apk add git
@@ -12,4 +41,3 @@ deploy-prod:
     - git config --global user.name "Gitlab Runner"
     - pip install mike
     - mike deploy --push $CI_COMMIT_BRANCH
-
