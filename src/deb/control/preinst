@@ -1,19 +1,19 @@
 #!/bin/bash
 
-useradd -rMU shinyproxy || true
+useradd -rMU indexmic || true
 
-if [ -d /etc/shinyproxy ];
+if [ -d /etc/indexmic ];
 then
-  if [ `stat -c '%U' /etc/shinyproxy/` != "shinyproxy" ];
+  if [ `stat -c '%U' /etc/indexmic/` != "indexmic" ];
   then
-    chown -R shinyproxy:shinyproxy /etc/shinyproxy || true
+    chown -R indexmic:indexmic /etc/indexmic || true
   fi
 fi
 
-if [ -d /opt/shinyproxy ];
+if [ -d /opt/indexmic ];
 then
-  if [ `stat -c '%U' /opt/shinyproxy/` != "shinyproxy" ];
+  if [ `stat -c '%U' /opt/indexmic/` != "indexmic" ];
   then
-    chown -R shinyproxy:shinyproxy /opt/shinyproxy || true
+    chown -R indexmic:indexmic /opt/indexmic || true
   fi
 fi

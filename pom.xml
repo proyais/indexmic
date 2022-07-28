@@ -180,20 +180,20 @@
 					</defineStatements>
 					<mappings>
 						<mapping>
-							<directory>/opt/shinyproxy</directory>
+							<directory>/opt/indexmic</directory>
 							<filemode>755</filemode>
 							<username>shinyproxy</username>
 							<groupname>shinyproxy</groupname>
 						</mapping>
 						<mapping>
-							<directory>/opt/shinyproxy</directory>
+							<directory>/opt/indexmic</directory>
 							<filemode>755</filemode>
 							<username>shinyproxy</username>
 							<groupname>shinyproxy</groupname>
 							<artifact />
 						</mapping>
 						<mapping>
-							<directory>/opt/shinyproxy</directory>
+							<directory>/opt/indexmic</directory>
 							<sources>
 								<softlinkSource>
 									<destination>shinyproxy.jar</destination>
@@ -202,16 +202,16 @@
 							</sources>
 						</mapping>
 						<mapping>
-							<directory>/opt/shinyproxy</directory>
+							<directory>/opt/indexmic</directory>
 							<filemode>755</filemode>
 							<username>shinyproxy</username>
 							<groupname>shinyproxy</groupname>
 							<sources>
 								<source>
-									<location>src/deb/shinyproxy.service</location>
+									<location>src/deb/indexmic.service</location>
 								</source>
 								<source>
-									<location>src/deb/shinyproxy.conf</location>
+									<location>src/deb/indexmic.conf</location>
 								</source>
 								<source>
 									<location>src/main/resources/application-demo.yml</location>
@@ -219,7 +219,7 @@
 							</sources>
 						</mapping>
 						<mapping>
-							<directory>/etc/shinyproxy</directory>
+							<directory>/etc/indexmic</directory>
 							<filemode>755</filemode>
 							<username>shinyproxy</username>
 							<groupname>shinyproxy</groupname>
@@ -282,7 +282,7 @@
 							<linkTarget>/opt/${project.artifactId}/${project.build.finalName}.jar</linkTarget>
 						</data>
 						<data>
-							<src>${basedir}/src/deb/shinyproxy.service</src>
+							<src>${basedir}/src/deb/indexmic.service</src>
 							<type>file</type>
 							<mapper>
 								<type>perm</type>
@@ -292,7 +292,7 @@
 							</mapper>
 						</data>
 						<data>
-							<src>${basedir}/src/deb/shinyproxy.conf</src>
+							<src>${basedir}/src/deb/indexmic.conf</src>
 							<type>file</type>
 							<mapper>
 								<type>perm</type>

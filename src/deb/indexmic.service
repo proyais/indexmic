@@ -4,13 +4,13 @@ After=syslog.target network.target
 
 [Service]
 Type=simple
-User=shinyproxy
-Group=shinyproxy
-WorkingDirectory=/etc/shinyproxy
-ExecStart=/usr/bin/java -jar /opt/shinyproxy/shinyproxy.jar
+User=indexmic
+Group=indexmic
+WorkingDirectory=/etc/indexmic
+ExecStart=/usr/bin/java -jar /opt/indexmic/indexmic.jar
 ExecReload=/bin/kill -HUP $MAINPID
 KillMode=process
-PIDFile=/run/shinyproxy.lock
+PIDFile=/run/indexmic.lock
 
 [Install]
 WantedBy=multi-user.target

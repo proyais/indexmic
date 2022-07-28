@@ -2,48 +2,48 @@
 
 if [ -d /etc/init ];
 then
-  cp -u /opt/shinyproxy/shinyproxy.conf /etc/init/shinyproxy.conf
+  cp -u /opt/indexmic/indexmic.conf /etc/init/indexmic.conf
 fi
 
 if [ -d /run/systemd/system ];
 then
-  cp -u /opt/shinyproxy/shinyproxy.service /etc/systemd/system/shinyproxy.service
+  cp -u /opt/indexmic/indexmic.service /etc/systemd/system/indexmic.service
   systemctl daemon-reload   
 fi
 
 # copy default configuration file
-mkdir -p /etc/shinyproxy
-if [ ! -e /etc/shinyproxy/application.yml ];
+mkdir -p /etc/indexmic
+if [ ! -e /etc/indexmic/application.yml ];
 then
-  cp /opt/shinyproxy/application-demo.yml /etc/shinyproxy/application.yml
-  echo demo configuration file is created at /etc/shinyproxy/application.yml
+  cp /opt/indexmic/application-demo.yml /etc/indexmic/application.yml
+  echo configuración de demostración creada en /etc/indexmic/application.yml
 else
-  echo using configuration file /etc/shinyproxy/application.yml
+  echo utilizando configuración en /etc/indexmic/application.yml
 fi
 
-TEST=$(ps auxwww | grep /opt/shinyproxy | grep -c -v grep)
+TEST=$(ps auxwww | grep /opt/indexmic | grep -c -v grep)
 if [ $TEST -ne 0 ];
 then
-  echo shinyproxy is already running, restarting 
-  service shinyproxy restart
+  echo indexmic ya está corriendo, reiniciando...
+  service indexmic restart
   exit 0
 else
-  echo No shinyproxy running, trying to start one...
+  echo Iniciando indexmic...
   
-  service shinyproxy start
+  service indexmic start
   if [ -d /run/systemd/system ];
   then
-    systemctl enable shinyproxy.service
+    systemctl enable indexmic.service
   fi
 
   sleep 1
-  TEST=$(ps auxwww | grep /opt/shinyproxy | grep -c -v grep)
+  TEST=$(ps auxwww | grep /opt/indexmic | grep -c -v grep)
   if [ $TEST -ne 0 ];
   then
-    echo shinyproxy start-up succeeded!
+    echo ¡IndexMic inicio con exito!
     exit 0
   else
-    echo shinyproxy start-up failed! Please start manually with \`service shinyproxy start\`
+    echo IndexMic no se pudo iniciar automaticamente, intenta  \`service indexmic start\`
     exit 1
   fi
 fi
