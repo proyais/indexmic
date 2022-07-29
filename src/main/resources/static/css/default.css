@@ -30,8 +30,8 @@ body > div#navbar {
   max-height: 50px;
 }
 
-#navbar + div { padding-top: 50px; }
-#navbar + iframe { padding-top: 50px; }
+#navbar + div { padding-top: 56px; }
+#navbar + iframe { padding-top: 56px; }
 
 #applist, #admin {
 	margin-top: 10px;
