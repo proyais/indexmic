@@ -13,7 +13,6 @@ Para poder instalar y correr IndexMic de forma correcta se requieren
 - `openjdk-11-jre`: OpenJDK versión 11.
 - `docker-ce`, `docker-ce-cli` y `containerd.io`:  Docker y sus dependencias.
 - `wget`: Permite descargar binarios necesarios.
-- `git` (opcional): Facilita descargar IndexMic y actualizarlo en el futuro.
 
 Para instalar estas dependencias desde los repositorios de Ubuntu o Debian se
 puede manejar desde `apt`.
@@ -97,54 +96,50 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
 
-## Descargar IndexMic
-
-Existen dos métodos de descargar IndexMic. Con `git` o descargando los archivos
-con `wget` o `curl`.
-
-### Git
-
-Para descargar con `git` simplemente se debe clonar el repositorio de
-[IndexMic](https://gitlab.proyais.com/proyectoais/indexmic) con el siguiente
-comando:
-
-```
-sudo git clone https://gitlab.proyais.com/proyectoais/indexmic.git /etc/indexmic
-```
-
-Esto clonará el repositorio directamente a la carpeta `/etc/indexmic`. Si se desea utilizar
-otro directorio se puede especificar modificando el comando.
-
-### Descarga directa
-
-_La descarga directa solo se recomienda cuando se desea un manejo
-sin `git`. Esto hará más dificil la actualización futura._
-
-Para descargarlo con `wget` se podrá utilizar el siguiente comando:
-
-```
-wget https://gitlab.proyais.com/proyectoais/indexmic/-/archive/master/indexmic-master.zip
-```
-
-Esto descargará un archivo comprimido con los contenidos de IndexMic.
-Al descomprimir la carpeta deberá mover los archivos a `/etc/indexmic`
-para terminar la instalación.
-
 ## Instalar IndexMic
 
-Para instalar IndexMic en un servidor como un servicio, se debe ejecutar
-el script `install.sh` una vez los archivos este copiados en la carpeta
-`/etc/indexmic`.
+Existen varios métodos para instalar IndexMic, sin embargo, se recomienda
+la instalación utilizando `apt`. Esto garantizará las correctas dependencias
+para su sistema operativo.
 
+Para descargar el paquete `.deb` se debe ir a el repositorio oficial de
+IndexMic en GitHub. Este se puede descargar facilmente al servidor
+con utilizando `wget`.
+
+```sh
+wget -O indexmic_2.6.1_all.deb https://github.com/proyais/indexmic/releases/download/v2.6.1/indexmic_2.6.1_all.deb
 ```
-sudo /etc/indexmic/install.sh
+
+Después, utilizando `apt` o algún otro sistema para instalar paquetes `.deb` se puede instalar.
+
+```sh
+sudo apt install ./indexmic_2.6.1_all.deb
 ```
 
-Esto creará un servicio llamada `indexmic.service` en el servidor. IndexMic
-debería poder accederse desde `hostname:8080` una vez acabe de correr el
-script.
+Esto creará la carpeta `/etc/indexmic` y el archivo `application.yml`. Este archivo
+es el archivo de configuración de IndexMic, donde se indicará el sistema de
+autenticación, las aplicaciones y sus parámetros, entre otras configuraciones.
 
-## Iniciar, reiniciar y detener IndexMic
+### Docker en el mismo sistema
+
+Cuando docker corre en el mismo sistema, el usuario `indexmic`,
+el cual se crea automáticamente con la instalación, debe
+hacer parte del grupo `docker` para poder iniciar
+contenedores.
+
+Para esto se puede utilizar:
+
+```sh
+sudo usermod -aG docker indexmic
+```
+
+## Habilitar, iniciar, reiniciar y detener IndexMic
+
+Para habilitar el servicio IndexMic se debe utilizar `systemctl`:
+
+```sh
+sudo systemctl enable indexmic.service
+```
 
 Por defecto IndexMic inicia cuando el servidor inicie, sin embargo, si
 un error evita el inicio de este puede iniciarse con:
@@ -176,39 +171,7 @@ a otro archivo con:
 sudo cp /etc/indexmic/application.yml application.yml.bak
 ```
 
-Una vez hecho el backup, puede hacer un pull al repositorio para traerse los nuevos
-cambios:
+Una vez hecho el backup, se puede descargar el `.deb` con la nueva versión y
+reinstalar IndexMic con la nueva versión.
 
-```
-cd /etc/indexmic
-```
-```
-git pull
-```
 
-Si la nueva versión contienen un nuevo binario de ShinyProxy se recomienda volver
-a correr:
-
-```
-/etc/indexmic/install.sh
-```
-
-### Resolver conflictos
-
-Si la actualización trae cambios a la configuración es posible que se generen
-conflictos en el archivo `application.yml`. Git no le permitirá hacer
-el pull hasta que haya resuelto los conflictos. En estos casos, simplemente
-copie los contenidos de su backup y complete el pull.
-
-Para completar el pull se puede hacer:
-
-```
-git add .
-```
-```
-git commit
-```
-
-Puede que después de la actualización partes de la interfaz hayan cambiado
-por lo cual es importante revisar los cambios hecho de versión en
-versión.

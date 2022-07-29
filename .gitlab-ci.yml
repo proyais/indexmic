@@ -32,7 +32,6 @@ deploy-wiki:
   stage: deploy
   only:
     - master
-    - tags
   script:
     - cd ./wiki
     - apk add git

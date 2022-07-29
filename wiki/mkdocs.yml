@@ -3,6 +3,7 @@ nav:
   - Inicio: index.md
   - Documentación:
     - Instalación: instalacion.md
+    - Seguridad: seguridad.md
     - Configuración:
       - Autenticación: auth.md
       - Analítica Integrada Salud: aisalud.md
